@@ -1,0 +1,22 @@
+@startuml
+start
+:The user lands on the homepage;
+:The user enters her/his address details;
+repeat :The user sees a list of restaurants;
+backward :The user filters and change order of the available restaurants;
+repeat while (The user interacts with the available restaurants)
+:The user selects a restaurant to order a meal;
+repeat :The user sees a list of meals available in current restaurant;
+backward :The user filters the available meals;
+repeat while (The user interacts with the available meals)
+:The user adds dish(es) to the basket;
+:The user sees selected meals and payment details in the order summary;
+:The user proceeds with the checkout;
+:The user enters personal and delivery-specific details;
+repeat :The user sees the sum to be paid;
+backward :The user enters a voucher code for discount;
+repeat while (The user enters desired payment details)
+:The user proceeds with the payment;
+:The user completes the payment;
+stop
+@enduml
