@@ -1,0 +1,18 @@
+{
+  "title": "",
+  "description": "",
+  "language": "",
+  "gitbook": "3.2.3",
+  "plugins": [
+    "graphviz-and-plant-uml"
+  ],
+  "pluginsConfig": {
+    "graphviz-and-plant-uml": {
+      "Render": "PlantUMLServer",
+      "Server": "https://YOUR.PLANTUML.SERVER.com/"
+    }
+  },
+  "styles": {
+    "website": "website.css"
+  }
+}
