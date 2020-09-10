@@ -1,0 +1,28 @@
+stages:
+  - deploy
+
+# [DEPLOY | Update documentation]
+pages:
+  image: node:13-alpine
+  stage: deploy
+  before_script:
+  - apk add util-linux
+  - npm install gitbook-cli -g
+  - gitbook fetch 3.2.3
+  script:
+    # Temporary folder to be published
+    - mkdir tmp
+    # Copy all config files to tmp dir
+    - cp ./book.json ./tmp
+    - cp ./website.css ./tmp
+    # Copy diagrams by appending and prepending puml rendering tags and renaming them to MD files
+    - find . -type f -name "*.puml" -not -path "./tmp/*" -exec cp --parents -- {} ./tmp \; -exec sed -i '1i {% puml %}' {} \; -exec sed -i -e '$a {% endpuml %}' {} \; -exec rename ".puml" ".md" {} \;
+    - cd ./tmp
+    - gitbook install
+    - gitbook build . ../public
+  artifacts:
+    paths:
+      - public
+  only:
+    - master
+  allow_failure: false
